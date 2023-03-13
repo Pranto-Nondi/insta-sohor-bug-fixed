@@ -12,14 +12,20 @@ const getReportedPosts = () => {
 };
 
 const isLiked = (id) => {
-  return likedPostsId?.length && !!likedPostsId.includes(id);
+  console.log(likedPostsId)
+  if (likedPostsId.includes(id)) {
+    return likedPostsId;
+  }
+ 
 };
 
 const addToLiked = (id) => {
-  console.log(id);
-  console.log(likedPostsId)
-  likedPostsId.push(id);
-  showPosts(posts);
+  if (!likedPostsId.includes(id)) {
+    likedPostsId.push(id);
+    showPosts(posts);
+  }
+
+
 };
 
 const reportPost = (id) => {
@@ -38,6 +44,7 @@ const switchTab = (id) => {
     document.getElementById("liked").style.display = "none";
     document.getElementById("reported").style.display = "none";
   } else if (id === "liked") {
+    document.getElementById("liked").textContent = "";
     document.getElementById("liked").style.display = "block";
     document.getElementById("posts").style.display = "none";
     document.getElementById("reported").style.display = "none";
@@ -53,7 +60,7 @@ const switchTab = (id) => {
 };
 
 const createPost = (post) => {
-  console.log(post)
+
   const image = post.image;
   const div = document.createElement("article");
   div.classList.add("post");
